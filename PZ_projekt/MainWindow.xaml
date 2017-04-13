@@ -8,13 +8,20 @@
         Title="MainWindow" Height="720" Width="1280">
     <Grid>
         <Label x:Name="Dodaj_plik" Content="Dodane pliki" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.505"/>
-        <Button x:Name="Dodaj" Content="Dodaj plik" HorizontalAlignment="Left" Margin="285,36,0,0" VerticalAlignment="Top" Width="100" Click="Dodaj_Click" Height="25"/>
-        <Button x:Name="Generuj" Content="Generuj" HorizontalAlignment="Left" Margin="285,117,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.162,0.323" Height="25"/>
-        <Button x:Name="Usuń" Content="Usuń" HorizontalAlignment="Left" Margin="285,76,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Usuń_Click"/>
-        <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left" Margin="23,179,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="183,183,0,0" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="listFiles" HorizontalAlignment="Left" Height="125" Margin="23,36,0,0" VerticalAlignment="Top" Width="211"/>
-        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="435,179,0,0" VerticalAlignment="Top" Width="100"/>
-
+        <Button x:Name="Dodaj" Content="Dodaj plik" HorizontalAlignment="Left" Margin="23,117,0,0" VerticalAlignment="Top" Width="100" Click="Dodaj_Click" Height="25"/>
+        <Button x:Name="Generuj" Content="Generuj" HorizontalAlignment="Left" Margin="23,165,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.162,0.323" Height="25" Click="Generuj_Click" IsEnabled="False"/>
+        <Button x:Name="Usuń1" Content="Usuń" HorizontalAlignment="Left" Margin="341,71,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Usuń1_Click" Visibility="Hidden"/>
+        <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left" Margin="168,182,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBoxpodmacierz" HorizontalAlignment="Left" Margin="341,182,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged"/>
+        <Button x:Name="Usuń2" Content="Usuń" HorizontalAlignment="Left" Margin="341,101,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Usuń2_Click" Visibility="Hidden"/>
+        <Label x:Name="labelFile1" Content="" HorizontalAlignment="Left" Margin="186,70,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
+        <Label x:Name="labelFile2" Content="" HorizontalAlignment="Left" Margin="186,91,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
+        <Label x:Name="labelFile1_Copy" Content="Plik 1:" HorizontalAlignment="Left" Margin="23,71,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="labelFile2_Copy" Content="Plik 2:" HorizontalAlignment="Left" Margin="23,91,0,0" VerticalAlignment="Top" Width="100"/>
+        <Grid  HorizontalAlignment="Left" Height="350" Margin="150,250,0,0" VerticalAlignment="Top" Width="900">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel x:Name="panel"/>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>
