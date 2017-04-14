@@ -154,7 +154,7 @@ namespace PZ_projekt
                             TextBox dodany = new TextBox();
                             dodany.IsReadOnly = true;
                             dodany.Text = obliczenia;
-                            m_panel.Children.Add(dodany);
+                            doczyszczenia.Children.Add(dodany);
                         }
                     };
 
