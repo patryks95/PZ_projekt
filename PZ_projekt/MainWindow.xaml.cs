@@ -142,7 +142,12 @@ namespace PZ_projekt
 
                     temp.Expanded += (s, e) =>
                     {
-                        string tytul = ((Expander)s).Header.ToString();
+
+                        Expander dzialania = (Expander)s;
+                        string tytul = dzialania.Header.ToString();
+                        StackPanel doczyszczenia = (StackPanel)dzialania.Content;
+                        doczyszczenia.Children.Clear();
+                        /* Dlaczego działa m_panel.Children.Clear()*/
                         List<string> obliczone = oblicz(tytul.Substring(0, 10), tytul.Substring(10, 15), two);
                         foreach (string obliczenia in obliczone)
                         {
