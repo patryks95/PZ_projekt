@@ -126,9 +126,10 @@ namespace PZ_projekt
             
 
         }
-        Expander temp;
         private void dodaj_do_panelu()
         {
+            Expander temp;
+
             panel.Children.Clear();
             for (int i = 0; i < one.Count; i += 4)
             {
@@ -139,12 +140,11 @@ namespace PZ_projekt
                     StackPanel m_panel = new StackPanel();
                     temp.Content = m_panel;
 
-                    temp.Expanded += (s, e) => 
+                    temp.Expanded += (s, e) =>
                     {
-                        temp.Content = m_panel;
                         string tytul = ((Expander)s).Header.ToString();
                         List<string> obliczone = oblicz(tytul.Substring(0, 10), tytul.Substring(10, 15), two);
-                        foreach(string obliczenia in obliczone)
+                        foreach (string obliczenia in obliczone)
                         {
                             TextBox dodany = new TextBox();
                             dodany.IsReadOnly = true;
@@ -152,7 +152,7 @@ namespace PZ_projekt
                             m_panel.Children.Add(dodany);
                         }
                     };
-                    
+
                     panel.Children.Add(temp);
                 }
             }
