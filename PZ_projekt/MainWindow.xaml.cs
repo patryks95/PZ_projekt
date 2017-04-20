@@ -254,29 +254,29 @@ namespace PZ_projekt
 
                         Double Energia_one = Math.Round(Double.Parse(energia.Replace(".", ",")),4);
                         Double Energia_two = Math.Round(Double.Parse(Two[i + 2].Replace(".", ",")),4);
-                        Double Liczba_falowa = Math.Abs(Energia_two - Energia_one);
+                        Double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one),4, MidpointRounding.ToEven);
                         Double dlugosc=0;
                         if (Liczba_falowa >= 50000)
                         {
-                            dlugosc = Math.Round(1000000000 / Liczba_falowa, 4); 
+                            dlugosc = Math.Round((1000000000 / Liczba_falowa), 4); 
                         }
                         if (Liczba_falowa < 50000)
                         {
                             Double n =  1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
-                            dlugosc = Math.Round(1000000000 / (Liczba_falowa * n), 4);
+                            dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)), 4);
 
 
                         }
                         if ((Energia_two - Energia_one) > 0) {
-                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↑"));
+                            wynik.Add(String.Format("{0,15}{1,40}{2,40}{3,40}{4,20}{5,40}", Two[i].ToString(), Two[i + 2].ToString(),  Liczba_falowa.ToString(), dlugosc.ToString(), "↑",Two[i + 3].ToString()));
                         }
                         if ((Energia_two - Energia_one) == 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
+                            wynik.Add(String.Format("{0,15}{1,40}{2,40}{3,40}{4,20}{5,40}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊", Two[i + 3].ToString()));
                         }
                         if ((Energia_two - Energia_one) < 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
+                            wynik.Add(String.Format("{0,15}{1,40}{2,40}{3,40}{4,20}{5,40}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓", Two[i + 3].ToString()));
                         }
 
 
