@@ -271,11 +271,11 @@ namespace PZ_projekt
                         }
                         if ((Energia_two - Energia_one) == 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-25}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
+                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
                         }
                         if ((Energia_two - Energia_one) < 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-25}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
+                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
                         }
 
 
