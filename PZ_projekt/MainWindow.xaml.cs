@@ -102,8 +102,11 @@ namespace PZ_projekt
             }
             one = dane(temp.ToArray<string>());
 
+            
 
             _MatrixCount = Convert.ToInt32(one[(one.Count - 4)]);
+            comboBoxpodmacierz.Items.Clear();
+
             for (int i = 1; i <= _MatrixCount; i++)
             {
                 
@@ -249,31 +252,31 @@ namespace PZ_projekt
                     if (Int32.Parse(numer_macierzy) - 1 == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) + 1 == Int32.Parse(Two[i]))
                     {
 
-                        Double Energia_one = Double.Parse(energia.Replace(".", ","));
-                        Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
+                        Double Energia_one = Math.Round(Double.Parse(energia.Replace(".", ",")),4);
+                        Double Energia_two = Math.Round(Double.Parse(Two[i + 2].Replace(".", ",")),4);
                         Double Liczba_falowa = Math.Abs(Energia_two - Energia_one);
                         Double dlugosc=0;
                         if (Liczba_falowa >= 50000)
                         {
-                            dlugosc = 1000000000 / Liczba_falowa;
+                            dlugosc = Math.Round(1000000000 / Liczba_falowa, 4); 
                         }
                         if (Liczba_falowa < 50000)
                         {
-                            Double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
-                            dlugosc = 1000000000 / (Liczba_falowa * n);
+                            Double n =  1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
+                            dlugosc = Math.Round(1000000000 / (Liczba_falowa * n), 4);
 
 
                         }
                         if ((Energia_two - Energia_one) > 0) {
-                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↑"));
+                            wynik.Add(String.Format("{0,5}{1,30}{2,40}{3,30}{4,30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↑"));
                         }
                         if ((Energia_two - Energia_one) == 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-25}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
+                            wynik.Add(String.Format("{0,5}{1,30}{2,40}{3,30}{4,30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
                         }
                         if ((Energia_two - Energia_one) < 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-25}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
+                            wynik.Add(String.Format("{0,5}{1,30}{2,40}{3,30}{4,30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
                         }
 
 
@@ -292,7 +295,11 @@ namespace PZ_projekt
 
         private void comboBoxpodmacierz_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dodaj_do_panelu();
+            if (comboBoxpodmacierz.Items.Count > 0)
+            {
+                dodaj_do_panelu();
+            }
+            
         }
     }
 }
