@@ -104,6 +104,8 @@ namespace PZ_projekt
 
 
             _MatrixCount = Convert.ToInt32(one[(one.Count - 4)]);
+            comboBoxpodmacierz.Items.Clear();
+
             for (int i = 1; i <= _MatrixCount; i++)
             {
                 
@@ -292,7 +294,11 @@ namespace PZ_projekt
 
         private void comboBoxpodmacierz_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dodaj_do_panelu();
+            if (comboBoxpodmacierz.Items.Count > 0)
+            {
+                dodaj_do_panelu();
+            }
+            
         }
     }
 }
