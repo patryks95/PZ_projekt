@@ -105,6 +105,8 @@ namespace PZ_projekt
             
 
             _MatrixCount = Convert.ToInt32(one[(one.Count - 4)]);
+            comboBoxpodmacierz.Items.Clear();
+
             for (int i = 1; i <= _MatrixCount; i++)
             {
                 
@@ -270,11 +272,11 @@ namespace PZ_projekt
                         }
                         if ((Energia_two - Energia_one) == 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-25}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
+                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊"));
                         }
                         if ((Energia_two - Energia_one) < 0)
                         {
-                            wynik.Add(String.Format("{0,-5}{1,-25}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
+                            wynik.Add(String.Format("{0,-5}{1,-30}{2,-30}{3,-30}{4,-30}{5,10}", Two[i].ToString(), Two[i + 2].ToString(), Two[i + 3].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓"));
                         }
 
 
@@ -293,7 +295,11 @@ namespace PZ_projekt
 
         private void comboBoxpodmacierz_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dodaj_do_panelu();
+            if (comboBoxpodmacierz.Items.Count > 0)
+            {
+                dodaj_do_panelu();
+            }
+            
         }
     }
 }
