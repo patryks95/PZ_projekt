@@ -70,7 +70,7 @@
                     <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom"/>
                     <ComboBox Grid.Row="1" x:Name="comboBoxpodmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged"/>
                 </Grid>
-                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,31,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click"/>
+                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,31,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click" IsEnabled="False"/>
             </Grid>
         </Grid>       
         <Grid  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="20,20,20,20" Width="900">

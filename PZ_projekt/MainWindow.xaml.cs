@@ -125,6 +125,7 @@ namespace PZ_projekt
 
             sr.Close();
             comboBoxpodmacierz.SelectedItem = 1;
+            Zapisz.IsEnabled = true;
 
             
 
@@ -315,7 +316,7 @@ namespace PZ_projekt
             {
                 List<String> wynik = new List<String>();
                 List<Lista> lista = new List<Lista>();
-                StreamWriter writer = File.CreateText("newfile.txt");
+                StreamWriter writer = File.CreateText(saveFileDialog1.FileName);
                 for (int j = 0; j < one.Count; j += 4)
                 {
                     writer.WriteLine(one[j] + one[j + 2] + one[j + 3]);
