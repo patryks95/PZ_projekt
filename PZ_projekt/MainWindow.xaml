@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PZ_projekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1000" MinHeight="720" MinWidth="1000" >
+        Title="MainWindow" Height="720" Width="1000" MinHeight="720" MinWidth="1000" MaxHeight="720" MaxWidth="1000" ResizeMode="CanMinimize" >
     <Grid Margin="20,20,20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="180"></RowDefinition>
@@ -70,6 +70,7 @@
                     <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom"/>
                     <ComboBox Grid.Row="1" x:Name="comboBoxpodmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged"/>
                 </Grid>
+                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,31,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click"/>
             </Grid>
         </Grid>       
         <Grid  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="20,20,20,20" Width="900">
