@@ -393,5 +393,90 @@ namespace PZ_projekt
 
             
         }
+
+        private void Parzysty_Click(object sender, RoutedEventArgs e)
+        {
+            if (Nieparzysty.IsChecked == true)
+            {
+                Nieparzysty.IsChecked = false;
+            }
+            if (Parzysty2.IsChecked == true || Nieparzysty2.IsChecked == false)
+            {
+                Parzysty2.IsChecked = false;
+                Nieparzysty2.IsChecked = true;
+            }
+            if (Parzysty.IsChecked == false)
+            {
+                Nieparzysty.IsChecked = false;
+                Nieparzysty2.IsChecked = false;
+                Parzysty.IsChecked = false;
+                Parzysty2.IsChecked = false;
+
+            }
+        }
+
+        private void Nieparzysty_Click(object sender, RoutedEventArgs e)
+        {
+            if (Parzysty.IsChecked == true)
+            {
+                Parzysty.IsChecked = false;
+            }
+            if (Parzysty2.IsChecked == false || Nieparzysty2.IsChecked == true)
+            {
+                Parzysty2.IsChecked = true;
+                Nieparzysty2.IsChecked = false;
+            }
+            if (Nieparzysty.IsChecked == false)
+            {
+                Nieparzysty.IsChecked = false;
+                Nieparzysty2.IsChecked = false;
+                Parzysty.IsChecked = false;
+                Parzysty2.IsChecked = false;
+
+            }
+        }
+
+        private void Parzysty2_Click(object sender, RoutedEventArgs e)
+        {
+            if (Nieparzysty2.IsChecked == true)
+            {
+                Nieparzysty2.IsChecked = false;
+            }
+            if (Parzysty.IsChecked == true || Nieparzysty.IsChecked == false)
+            {
+                Parzysty.IsChecked = false;
+                Nieparzysty.IsChecked = true;
+            }
+            if (Parzysty2.IsChecked == false)
+            {
+                Nieparzysty.IsChecked = false;
+                Nieparzysty2.IsChecked = false;
+                Parzysty.IsChecked = false;
+                Parzysty2.IsChecked = false;
+
+            }
+
+        }
+
+        private void Nieparzysty2_Click(object sender, RoutedEventArgs e)
+        {
+            if (Parzysty2.IsChecked == true)
+            {
+                Parzysty2.IsChecked = false;
+            }
+            if (Parzysty.IsChecked == false || Nieparzysty.IsChecked == true)
+            {
+                Parzysty.IsChecked = true;
+                Nieparzysty.IsChecked = false;
+            }
+            if (Nieparzysty2.IsChecked == false)
+            {
+                Nieparzysty.IsChecked = false;
+                Nieparzysty2.IsChecked = false;
+                Parzysty.IsChecked = false;
+                Parzysty2.IsChecked = false;
+
+            }
+        }
     }
 }
