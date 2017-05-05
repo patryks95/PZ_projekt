@@ -24,6 +24,9 @@
                     <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label x:Name="Dodaj_plik" Content="Dodane pliki" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+                <Label x:Name="Parzystye" Content="Parzysty:" HorizontalAlignment="Left" Margin="380,0,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Niparzystye" Content="Nieparzysty:" HorizontalAlignment="Left" Margin="450,0,0,0" VerticalAlignment="Top"/>
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -36,7 +39,9 @@
                         </Grid.ColumnDefinitions>
                         <Label x:Name="labelFile1_Copy" Content="Plik 1:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <Label Grid.Column="1" x:Name="labelFile1" Content="" HorizontalAlignment="Left"  VerticalAlignment="Center" Visibility="Hidden"/>
-                    </Grid>                    
+                    </Grid>
+                    <CheckBox x:Name="Parzysty" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Click="Parzysty_Click"/>
+                    <CheckBox x:Name="Nieparzysty"  HorizontalAlignment="Left" Margin="470,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="Nieparzysty_Click" />
                     <Button Grid.Column="1" x:Name="Usuń1" Content="Usuń" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100"  Click="Usuń1_Click" Visibility="Hidden"/>
                 </Grid>
                 <Grid Grid.Row="2">
@@ -51,10 +56,13 @@
                         </Grid.ColumnDefinitions>
                         <Label x:Name="labelFile2_Copy" Content="Plik 2:" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
                         <Label Grid.Column="1" x:Name="labelFile2" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden"/>
-                    </Grid>                                
+                    </Grid>
+                    <CheckBox x:Name="Parzysty2" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Click="Parzysty2_Click"/>
+                    <CheckBox x:Name="Nieparzysty2"  HorizontalAlignment="Left" Margin="470,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="Nieparzysty2_Click" />
                     <Button Grid.Column="1" x:Name="Usuń2" Content="Usuń" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100"  Click="Usuń2_Click" Visibility="Hidden"/>
                 </Grid>
                 <Button Grid.Row="3" x:Name="Dodaj" Content="Dodaj plik" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="Dodaj_Click" />
+                <Label Content="Label" HorizontalAlignment="Left" Margin="269,24,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
