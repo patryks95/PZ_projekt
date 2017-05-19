@@ -126,6 +126,7 @@ namespace PZ_projekt
             sr.Close();
             comboBoxpodmacierz.SelectedItem = 1;
             Zapisz.IsEnabled = true;
+            etykiety.Visibility = Visibility.Visible;
 
             
 
@@ -155,10 +156,18 @@ namespace PZ_projekt
                         List<string> obliczone = oblicz(tytul.Substring(0, 10), tytul.Substring(10, 15), two);
                         foreach (string obliczenia in obliczone)
                         {
-                            TextBox dodany = new TextBox();
-                            dodany.IsReadOnly = true;
-                            dodany.Text = obliczenia;
-                            doczyszczenia.Children.Add(dodany);
+                            String[] skladowe = obliczenia.Split(new Char[] { '-' });
+                            
+                            Grid grid = new Grid();
+                            
+                            for (int a = 0; a<skladowe.Length;a++)
+                            {
+                                Label etykieta = new Label();
+                                etykieta.Content = skladowe[a];
+                                etykieta.Margin = new Thickness((a*80)+15, 0, 0, 0);
+                                grid.Children.Add(etykieta);
+                            }
+                            doczyszczenia.Children.Add(grid);
                         }
                     };
 
@@ -271,15 +280,15 @@ namespace PZ_projekt
 
                         }
                         if ((Energia_two - Energia_one) > 0) {
-                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓" ));
+                            wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓" ));
                         }
                         if ((Energia_two - Energia_one) == 0)
                         {
-                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊"));
+                            wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5,}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊"));
                         }
                         if ((Energia_two - Energia_one) < 0)
                         {
-                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑"));
+                            wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑"));
                         }
 
 

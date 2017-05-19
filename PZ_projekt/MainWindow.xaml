@@ -9,12 +9,12 @@
     <Grid Margin="20,20,20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="180"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>           
-        </Grid.RowDefinitions>        
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="130"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>                                                    
+                <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
@@ -30,7 +30,7 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>                        
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.ColumnSpan="2" Margin="0,0,444,0">
                         <Grid.ColumnDefinitions>
@@ -69,22 +69,23 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Generuj" Content="Generuj" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100"  Click="Generuj_Click" IsEnabled="False"/>
+                <Button x:Name="Generuj" Content="Generuj" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100"  Click="Generuj_Click" IsEnabled="False" Margin="0,0,0,31.4"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom"/>
-                    <ComboBox Grid.Row="1" x:Name="comboBoxpodmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged"/>
+                    <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="-9,-35,0,34.6" Height="26"/>
+                    <ComboBox x:Name="comboBoxpodmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged" Margin="2,0,0,24.4" Grid.RowSpan="2"/>
                 </Grid>
-                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,31,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click" IsEnabled="False"/>
+                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,1,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click" IsEnabled="False"/>
             </Grid>
-        </Grid>       
+        </Grid>
         <Grid  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="20,20,20,20" Width="900">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
                 <StackPanel   x:Name="panel"/>
             </ScrollViewer>
         </Grid>
+        <Label x:Name="etykiety" Content="Macierz          Energia                  Opis               Liczba falowa           Długość                  Przejście" HorizontalAlignment="Left" Margin="31,152,0,0" VerticalAlignment="Top" Height="27" Visibility="Hidden"/>
     </Grid>
 </Window>
