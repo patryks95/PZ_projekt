@@ -28,7 +28,7 @@ namespace PZ_projekt
         private OpenFileDialog openFileDialogFile1=new OpenFileDialog();
         private string _File1Stream { get; set; }
         private string _File2Stream { get; set; }
-
+       
         private string _File1Name { get; set; }
         private string _File2Name { get; set; }
         private int _MatrixCount { get; set; }
@@ -140,7 +140,7 @@ namespace PZ_projekt
                 if (Convert.ToInt32(one[i]) == Convert.ToInt32(comboBoxpodmacierz.SelectedItem.ToString()))
                 {
                     temp = new Expander();
-                    temp.Header = string.Format("{0,5}{1,15:N4}{2,15:N4}", one[i], one[i + 2], one[i + 3]);
+                    temp.Header = string.Format("{0,5}{1,25:N4}{2,35:N4}", one[i], one[i + 2], one[i + 3]);
                     StackPanel m_panel = new StackPanel();
                     temp.Content = m_panel;
 
@@ -271,15 +271,15 @@ namespace PZ_projekt
 
                         }
                         if ((Energia_two - Energia_one) > 0) {
-                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(),  Liczba_falowa.ToString(), dlugosc.ToString(), "↑",Two[i + 3].ToString()));
+                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓" ));
                         }
                         if ((Energia_two - Energia_one) == 0)
                         {
-                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊", Two[i + 3].ToString()));
+                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊"));
                         }
                         if ((Energia_two - Energia_one) < 0)
                         {
-                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓", Two[i + 3].ToString()));
+                            wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑"));
                         }
 
 
