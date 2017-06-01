@@ -11,23 +11,23 @@ namespace PZ_projekt
         int nr_podmacierzy;
         float energia;
         double liczba_falowa;
-        double dlugosc;
+        public double dlugosc;
         string przejscie;
 
         string opis_one;
         double energia_one;
-        float macierz_one;
-        float j_one;
+        double macierz_one;
+        double j_one;
 
         string opis_two;
         double energia_two;
-        float macierz_two;
-        float j_two;
+        double macierz_two;
+        double j_two;
 
         string liczba_elektronow;
 
 
-        public Lista(string opis_one, double energia_one, float macierz_one,  string opis_two, double energia_two, float macierz_two,  string liczba_elektronow)
+        public Lista(string opis_one, double energia_one, double macierz_one,  string opis_two, double energia_two, double macierz_two,  string liczba_elektronow)
         {
 
             this.liczba_falowa = Math.Round(Math.Abs(energia_two - energia_one), 4);
@@ -209,7 +209,7 @@ namespace PZ_projekt
             }
         }
 
-        public float Macierz_one
+        public double Macierz_one
         {
             get
             {
@@ -222,7 +222,7 @@ namespace PZ_projekt
             }
         }
 
-        public float J_one
+        public double J_one
         {
             get
             {
@@ -261,7 +261,7 @@ namespace PZ_projekt
             }
         }
 
-        public float Macierz_two
+        public double Macierz_two
         {
             get
             {
@@ -274,7 +274,7 @@ namespace PZ_projekt
             }
         }
 
-        public float J_two
+        public double J_two
         {
             get
             {
