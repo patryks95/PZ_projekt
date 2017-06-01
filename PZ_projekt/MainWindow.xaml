@@ -24,15 +24,15 @@
                     <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label x:Name="Dodaj_plik" Content="Dodane pliki" HorizontalAlignment="Left"  VerticalAlignment="Top" />
-                <Label x:Name="Parzystye" Content="Parzysty:" HorizontalAlignment="Left" Margin="354,0,0,5.2"/>
-                <Label x:Name="Niparzystye" Content="Nieparzysty:" HorizontalAlignment="Left" Margin="415,0,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Parzystye" Content="Parzysty:" HorizontalAlignment="Left" Margin="380,0,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Niparzystye" Content="Nieparzysty:" HorizontalAlignment="Left" Margin="450,0,0,0" VerticalAlignment="Top"/>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid>
+                    <Grid Grid.ColumnSpan="2" Margin="0,0,444,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -40,16 +40,16 @@
                         <Label x:Name="labelFile1_Copy" Content="Plik 1:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <Label Grid.Column="1" x:Name="labelFile1" Content="" HorizontalAlignment="Left"  VerticalAlignment="Center" Visibility="Hidden"/>
                     </Grid>
-                    <CheckBox x:Name="Parzysty" HorizontalAlignment="Left" Margin="373,0,0,0" VerticalAlignment="Top" Click="Parzysty_Click"/>
-                    <CheckBox x:Name="Nieparzysty"  HorizontalAlignment="Left" Margin="438,0,0,0" VerticalAlignment="Top" Click="Nieparzysty_Click" />
-                    <Button Grid.Column="1" x:Name="Usuń1" Content="Usuń" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100"  Click="Usuń1_Click" Visibility="Hidden"/>
+                    <CheckBox x:Name="Parzysty" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Click="Parzysty_Click"/>
+                    <CheckBox x:Name="Nieparzysty"  HorizontalAlignment="Left" Margin="470,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="Nieparzysty_Click" />
+                    <Button Grid.Column="1" x:Name="Usuń1" Content="Usuń" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100"  Click="Usuń1_Click" Visibility="Hidden" Margin="69,2,0,3"/>
                 </Grid>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid>
+                    <Grid Grid.ColumnSpan="2" Margin="0,0,444,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -57,9 +57,9 @@
                         <Label x:Name="labelFile2_Copy" Content="Plik 2:" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
                         <Label Grid.Column="1" x:Name="labelFile2" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden"/>
                     </Grid>
-                    <CheckBox x:Name="Parzysty2" HorizontalAlignment="Left" Margin="373,3,0,0" VerticalAlignment="Top" Click="Parzysty2_Click"/>
-                    <CheckBox x:Name="Nieparzysty2"  HorizontalAlignment="Left" Margin="438,3,0,0" VerticalAlignment="Top" Click="Nieparzysty2_Click" />
-                    <Button Grid.Column="1" x:Name="Usuń2" Content="Usuń" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100"  Click="Usuń2_Click" Visibility="Hidden"/>
+                    <CheckBox x:Name="Parzysty2" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Click="Parzysty2_Click"/>
+                    <CheckBox x:Name="Nieparzysty2"  HorizontalAlignment="Left" Margin="470,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="Nieparzysty2_Click" />
+                    <Button Grid.Column="1" x:Name="Usuń2" Content="Usuń" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100"  Click="Usuń2_Click" Visibility="Hidden" Margin="70,2,0,3"/>
                 </Grid>
                 <Button Grid.Row="3" x:Name="Dodaj" Content="Dodaj plik" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="Dodaj_Click" />
                 <Label Content="Label" HorizontalAlignment="Left" Margin="269,24,0,0" VerticalAlignment="Top"/>
@@ -69,16 +69,16 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Generuj" Content="Generuj" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100"  Click="Generuj_Click" IsEnabled="False"/>
+                <Button x:Name="Generuj" Content="Generuj" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100"  Click="Generuj_Click" IsEnabled="False" Margin="0,0,0,31.4"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom"/>
-                    <ComboBox Grid.Row="1" x:Name="comboBoxpodmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged"/>
+                    <Label x:Name="Wybierz" Content="Wybierz podmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="-9,-35,0,34.6" Height="26"/>
+                    <ComboBox x:Name="comboBoxpodmacierz" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="120" SelectionChanged="comboBoxpodmacierz_SelectionChanged" Margin="2,0,0,24.4" Grid.RowSpan="2"/>
                 </Grid>
-                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,31,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click" IsEnabled="False"/>
+                <Button x:Name="Zapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="100,1,0,0" VerticalAlignment="Top" Width="100" Height="19" Click="Zapisz_Click" IsEnabled="False"/>
             </Grid>
         </Grid>
         <Grid  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="20,20,20,20" Width="900">
@@ -86,5 +86,6 @@
                 <StackPanel   x:Name="panel"/>
             </ScrollViewer>
         </Grid>
+        <Label x:Name="etykiety" Content="Macierz          Energia                  Opis               Liczba falowa           Długość                  Przejście" HorizontalAlignment="Left" Margin="31,152,0,0" VerticalAlignment="Top" Height="27" Visibility="Hidden"/>
     </Grid>
 </Window>

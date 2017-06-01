@@ -25,10 +25,10 @@ namespace PZ_projekt
     {
 
 
-        private OpenFileDialog openFileDialogFile1 = new OpenFileDialog();
+        private OpenFileDialog openFileDialogFile1=new OpenFileDialog();
         private string _File1Stream { get; set; }
         private string _File2Stream { get; set; }
-
+       
         private string _File1Name { get; set; }
         private string _File2Name { get; set; }
         private int _MatrixCount { get; set; }
@@ -64,7 +64,7 @@ namespace PZ_projekt
                             _File2Name = _File2Stream.Substring(_File2Stream.LastIndexOf('\\') + 1);
                             labelFile2.Content += _File2Name;
                             labelFile2.Visibility = Visibility.Visible;
-                            Usuń2.Visibility = Visibility.Visible;
+                            Usuń2.Visibility=Visibility.Visible;
                             Generuj.IsEnabled = true;
                         }
                         else
@@ -102,14 +102,14 @@ namespace PZ_projekt
             }
             one = dane(temp.ToArray<string>());
 
-
+            
 
             _MatrixCount = Convert.ToInt32(one[(one.Count - 4)]);
             comboBoxpodmacierz.Items.Clear();
 
             for (int i = 1; i <= _MatrixCount; i++)
             {
-
+                
                 comboBoxpodmacierz.Items.Add(i);
             }
             sr.Close();
@@ -126,8 +126,9 @@ namespace PZ_projekt
             sr.Close();
             comboBoxpodmacierz.SelectedItem = 1;
             Zapisz.IsEnabled = true;
+            etykiety.Visibility = Visibility.Visible;
 
-
+            
 
         }
         private void dodaj_do_panelu()
@@ -140,7 +141,7 @@ namespace PZ_projekt
                 if (Convert.ToInt32(one[i]) == Convert.ToInt32(comboBoxpodmacierz.SelectedItem.ToString()))
                 {
                     temp = new Expander();
-                    temp.Header = string.Format("{0,5}{1,15:N4}{2,15:N4}", one[i], one[i + 2], one[i + 3]);
+                    temp.Header = string.Format("{0,5}{1,25:N4}{2,35:N4}", one[i], one[i + 2], one[i + 3]);
                     StackPanel m_panel = new StackPanel();
                     temp.Content = m_panel;
 
@@ -152,13 +153,21 @@ namespace PZ_projekt
                         StackPanel doczyszczenia = (StackPanel)dzialania.Content;
                         doczyszczenia.Children.Clear();
                         /* Dlaczego działa m_panel.Children.Clear()*/
-                        List<string> obliczone = oblicz(tytul.Substring(0, 10), tytul.Substring(10, 15), two, Nieparzysty);
+                        List<string> obliczone = oblicz(tytul.Substring(0, 10), tytul.Substring(10, 15), two);
                         foreach (string obliczenia in obliczone)
                         {
-                            TextBox dodany = new TextBox();
-                            dodany.IsReadOnly = true;
-                            dodany.Text = obliczenia;
-                            doczyszczenia.Children.Add(dodany);
+                            String[] skladowe = obliczenia.Split(new Char[] { '-' });
+                            
+                            Grid grid = new Grid();
+                            
+                            for (int a = 0; a<skladowe.Length;a++)
+                            {
+                                Label etykieta = new Label();
+                                etykieta.Content = skladowe[a];
+                                etykieta.Margin = new Thickness((a*80)+15, 0, 0, 0);
+                                grid.Children.Add(etykieta);
+                            }
+                            doczyszczenia.Children.Add(grid);
                         }
                     };
 
@@ -245,135 +254,52 @@ namespace PZ_projekt
             return lista;
         }
 
-        static List<String> oblicz(String numer_macierzy, string energia, List<string> Two, CheckBox Nieparzysty)
+        static List<String> oblicz(String numer_macierzy, string energia, List<string> Two)
         {
             List<String> wynik = new List<String>();
-            if (Nieparzysty.IsChecked == true && Convert.ToInt32(numer_macierzy) == 2)
+            for (int i = 0; i < Two.Count; i++)
             {
-                for (int i = 0; i < Two.Count; i++)
+                if (i % 4 == 0)
                 {
-
-                    if (i % 4 == 0)
+                    if (Int32.Parse(numer_macierzy) - 1 == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) + 1 == Int32.Parse(Two[i]))
                     {
-                        if (Two[i] == "2" || Two[i] == "3")
+
+                        Double Energia_one = Double.Parse(energia.Replace(".", ","));
+                        Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
+                        Double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one),4);
+                        Double dlugosc=0;
+                        if (Liczba_falowa >= 50000)
                         {
-                            if (Int32.Parse(numer_macierzy) == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) + 1 == Int32.Parse(Two[i]))
-                            {
-
-                                Double Energia_one = Double.Parse(energia.Replace(".", ","));
-                                Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
-                                Double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one), 4);
-                                Double dlugosc = 0;
-                                if (Liczba_falowa >= 50000)
-                                {
-                                    dlugosc = Math.Round((1000000000 / Liczba_falowa), 4);
-                                }
-                                if (Liczba_falowa < 50000)
-                                {
-                                    Double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
-                                    dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)), 4);
-
-
-                                }
-                                if ((Energia_two - Energia_one) > 0)
-                                {
-                                    wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↑", Two[i + 3].ToString()));
-                                }
-                                if ((Energia_two - Energia_one) == 0)
-                                {
-                                    wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊", Two[i + 3].ToString()));
-                                }
-                                if ((Energia_two - Energia_one) < 0)
-                                {
-                                    wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓", Two[i + 3].ToString()));
-                                }
-
-                            }
-                            else
-                            {
-                                if (Int32.Parse(numer_macierzy) - 1 == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) + 1 == Int32.Parse(Two[i]))
-                                {
-
-                                    Double Energia_one = Double.Parse(energia.Replace(".", ","));
-                                    Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
-                                    Double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one), 4);
-                                    Double dlugosc = 0;
-                                    if (Liczba_falowa >= 50000)
-                                    {
-                                        dlugosc = Math.Round((1000000000 / Liczba_falowa), 4);
-                                    }
-                                    if (Liczba_falowa < 50000)
-                                    {
-                                        Double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
-                                        dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)), 4);
-
-
-                                    }
-                                    if ((Energia_two - Energia_one) > 0)
-                                    {
-                                        wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↑", Two[i + 3].ToString()));
-                                    }
-                                    if ((Energia_two - Energia_one) == 0)
-                                    {
-                                        wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊", Two[i + 3].ToString()));
-                                    }
-                                    if ((Energia_two - Energia_one) < 0)
-                                    {
-                                        wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓", Two[i + 3].ToString()));
-                                    }
-
-                                }
-                            }
+                            dlugosc = Math.Round((1000000000 / Liczba_falowa),4); 
                         }
+                        if (Liczba_falowa < 50000)
+                        {
+                            Double n =  1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
+                            dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)),4);
+
+
+                        }
+                        if ((Energia_two - Energia_one) > 0) {
+                            wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓" ));
+                        }
+                        if ((Energia_two - Energia_one) == 0)
+                        {
+                            wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5,}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊"));
+                        }
+                        if ((Energia_two - Energia_one) < 0)
+                        {
+                            wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑"));
+                        }
+
+
+
                     }
+
+
                 }
 
 
 
-            }
-            else
-            {
-
-                for (int i = 0; i < Two.Count; i++)
-                {
-                    if (i % 4 == 0)
-                    {
-
-                        if (Int32.Parse(numer_macierzy) - 1 == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) == Int32.Parse(Two[i]) || Int32.Parse(numer_macierzy) + 1 == Int32.Parse(Two[i]))
-                        {
-
-                            Double Energia_one = Double.Parse(energia.Replace(".", ","));
-                            Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
-                            Double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one), 4);
-                            Double dlugosc = 0;
-                            if (Liczba_falowa >= 50000)
-                            {
-                                dlugosc = Math.Round((1000000000 / Liczba_falowa), 4);
-                            }
-                            if (Liczba_falowa < 50000)
-                            {
-                                Double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
-                                dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)), 4);
-
-
-                            }
-                            if ((Energia_two - Energia_one) > 0)
-                            {
-                                wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↑", Two[i + 3].ToString()));
-                            }
-                            if ((Energia_two - Energia_one) == 0)
-                            {
-                                wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "◊", Two[i + 3].ToString()));
-                            }
-                            if ((Energia_two - Energia_one) < 0)
-                            {
-                                wynik.Add(String.Format("{0,11}{1,25:N4}{2,30:N4}{3,30:N4}{4,30}{5,30}", Two[i].ToString(), Two[i + 2].ToString(), Liczba_falowa.ToString(), dlugosc.ToString(), "↓", Two[i + 3].ToString()));
-                            }
-
-                        }
-                    }
-
-                }
             }
 
             return wynik;
@@ -385,28 +311,7 @@ namespace PZ_projekt
             {
                 dodaj_do_panelu();
             }
-
-        }
-
-        public void Inicjuj_Liste(List<string> One, List<string> Two)
-        {
-            List<Lista> lista = new List<Lista>();
-            for (int j = 0; j < one.Count; j += 4)
-            {
-
-
-                for (int i = 0; i < two.Count; i++)
-                {
-                    if (i % 4 == 0)
-                    {
-                        if (Int32.Parse(one[j]) - 1 == Int32.Parse(two[i]) || Int32.Parse(one[j]) == Int32.Parse(two[i]) || Int32.Parse(one[j]) + 1 == Int32.Parse(two[i]))
-                        {
-                            Lista temp_lista = new Lista(One[j + 3].ToString(), float.Parse(One[j + 2].Replace(".", ",")), float.Parse(One[j]), Two[j + 3].ToString(), float.Parse(Two[j + 2].Replace(".", ",")), float.Parse(Two[j]), "parzyste");
-                            lista.Add(temp_lista);
-                        }
-                    }
-                }
-            }
+            
         }
 
         private void Zapisz_Click(object sender, RoutedEventArgs e)
@@ -415,17 +320,15 @@ namespace PZ_projekt
             saveFileDialog1.Filter = "Plik tekstowy|*.txt";
             saveFileDialog1.Title = "Zapisz do pliku";
             saveFileDialog1.ShowDialog();
-            List<Lista> lista = new List<Lista>();
-            StreamWriter writer = File.CreateText(saveFileDialog1.FileName);
+
             if (saveFileDialog1.FileName != "")
             {
-                /*
                 List<String> wynik = new List<String>();
-                
-                
+                List<Lista> lista = new List<Lista>();
+                StreamWriter writer = File.CreateText(saveFileDialog1.FileName);
                 for (int j = 0; j < one.Count; j += 4)
                 {
-                    writer.WriteLine(String.Format("{0,5}{1,15}{2,15}", one[j], one[j + 2], one[j + 3]));
+                    writer.WriteLine(String.Format("{0,5}{1,15}{2,15}", one[j] , one[j + 2] , one[j + 3])); 
 
                     for (int i = 0; i < two.Count; i++)
                     {
@@ -436,16 +339,16 @@ namespace PZ_projekt
 
                                 float Energia_one = float.Parse(one[j + 2].Replace(".", ","));
                                 float Energia_two = float.Parse(two[i + 2].Replace(".", ","));
-                                double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one), 4);
+                                double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one),4);
                                 double dlugosc = 0;
                                 if (Liczba_falowa >= 50000)
                                 {
-                                    dlugosc = Math.Round((1000000000 / Liczba_falowa), 4);
+                                    dlugosc = Math.Round((1000000000 / Liczba_falowa),4);
                                 }
                                 if (Liczba_falowa < 50000)
                                 {
                                     double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 1000), 2)))) * 0.00000001;
-                                    dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)), 4);
+                                    dlugosc = Math.Round((1000000000 / (Liczba_falowa * n)),4);
 
 
                                 }
@@ -469,7 +372,7 @@ namespace PZ_projekt
 
                             }
 
-                            
+                            /*
                             lista.Sort(delegate (Lista x, Lista y)
                             {
                                 if (x.Dlugosc == null && y.Dlugosc == null) return 0;
@@ -477,14 +380,14 @@ namespace PZ_projekt
                                 else if (y.Dlugosc == null) return 1;
                                 else return x.Dlugosc.CompareTo(y.Dlugosc);
                             });
-                            
+                            */
 
 
                         }
 
                     }
-
-        */
+                 
+                    
 
                 }
                 List<Lista> SortedList = lista.OrderBy(o => o.Dlugosc).ToList();
@@ -510,7 +413,6 @@ namespace PZ_projekt
             {
                 Parzysty2.IsChecked = false;
                 Nieparzysty2.IsChecked = true;
-                Generuj.IsEnabled = true;
             }
             if (Parzysty.IsChecked == false)
             {
@@ -518,6 +420,7 @@ namespace PZ_projekt
                 Nieparzysty2.IsChecked = false;
                 Parzysty.IsChecked = false;
                 Parzysty2.IsChecked = false;
+
             }
         }
 
@@ -531,7 +434,6 @@ namespace PZ_projekt
             {
                 Parzysty2.IsChecked = true;
                 Nieparzysty2.IsChecked = false;
-                Generuj.IsEnabled = true;
             }
             if (Nieparzysty.IsChecked == false)
             {
@@ -553,7 +455,6 @@ namespace PZ_projekt
             {
                 Parzysty.IsChecked = false;
                 Nieparzysty.IsChecked = true;
-                Generuj.IsEnabled = true;
             }
             if (Parzysty2.IsChecked == false)
             {
@@ -576,7 +477,6 @@ namespace PZ_projekt
             {
                 Parzysty.IsChecked = true;
                 Nieparzysty.IsChecked = false;
-                Generuj.IsEnabled = true;
             }
             if (Nieparzysty2.IsChecked == false)
             {
