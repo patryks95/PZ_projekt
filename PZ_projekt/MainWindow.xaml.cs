@@ -144,16 +144,15 @@ namespace PZ_projekt
                     temp.Header = string.Format("{0,5}{1,25:N4}{2,35:N4}", one[i], one[i + 2], one[i + 3]);
                     StackPanel m_panel = new StackPanel();
                     temp.Content = m_panel;
-
+                    temp.Tag = i.ToString();
                     temp.Expanded += (s, e) =>
                     {
 
                         Expander dzialania = (Expander)s;
-                        string tytul = dzialania.Header.ToString();
                         StackPanel doczyszczenia = (StackPanel)dzialania.Content;
                         doczyszczenia.Children.Clear();
                         /* Dlaczego działa m_panel.Children.Clear()*/
-                        List<string> obliczone = oblicz(tytul.Substring(0, 5), tytul.Substring(6, 25), two);
+                        List<string> obliczone = oblicz(one[Convert.ToInt32(dzialania.Tag)], one[Convert.ToInt32(dzialania.Tag)+2], two);
                         foreach (string obliczenia in obliczone)
                         {
                             String[] skladowe = obliczenia.Split(new Char[] { '-' });
@@ -164,7 +163,7 @@ namespace PZ_projekt
                             {
                                 Label etykieta = new Label();
                                 etykieta.Content = skladowe[a];
-                                etykieta.Margin = new Thickness((a*80)+15, 0, 0, 0);
+                                etykieta.Margin = new Thickness((a*100)+15, 0, 0, 0);
                                 grid.Children.Add(etykieta);
                             }
                             doczyszczenia.Children.Add(grid);
@@ -267,30 +266,36 @@ namespace PZ_projekt
 
                             Double Energia_one = Double.Parse(energia.Replace(".", ","));
                             Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
-                            Double Liczba_falowa = Math.Round(Math.Abs(Energia_two - Energia_one), 4);
+                            Double Liczba_falowa = Math.Abs(Energia_two - Energia_one);
                             Double dlugosc = 0;
+                            Double n = 0;
+
                             if (Liczba_falowa >= 50000)
                             {
-                                dlugosc = Math.Round((100000000 / Liczba_falowa), 4);
+                                dlugosc = (100000000 / Liczba_falowa);
                             }
                             if (Liczba_falowa < 50000)
                             {
-                                Double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 10000), 2)))) * 0.00000001;
-                                dlugosc = Math.Round((100000000 / (Liczba_falowa * n)), 4);
+                                 n= 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 10000), 2)))) * 0.00000001;
+                                dlugosc = (100000000 / (Liczba_falowa * n));
 
 
                             }
+                            if(Energia_two > 59000 && Energia_two < 59080)
+                        {
+                            int a = 0;
+                        }
                             if ((Energia_two - Energia_one) > 0)
                             {
-                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓"));
+                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5} {6}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓", n));
                             }
                             if ((Energia_two - Energia_one) == 0)
                             {
-                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5,}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊"));
+                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5,} {6}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊", n));
                             }
                             if ((Energia_two - Energia_one) < 0)
                             {
-                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑"));
+                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5} {6}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑", n));
                             }
 
 
