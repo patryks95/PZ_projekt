@@ -34,12 +34,12 @@ namespace PZ_projekt
             
             if( liczba_falowa >= 50000)
             {
-                this.dlugosc = Math.Round((1000000000 / liczba_falowa), 4);
+                this.dlugosc = Math.Round((100000000 / liczba_falowa), 4);
             }
             if (liczba_falowa < 50000)
             {
-                double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((liczba_falowa / 1000), 2)))) * 0.00000001;
-                this.dlugosc = Math.Round((1000000000 / (liczba_falowa * n)), 4);
+                double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((liczba_falowa / 10000), 2)))) * 0.00000001;
+                this.dlugosc = Math.Round((100000000 / (liczba_falowa * n)), 4);
             }
             
             if ((energia_two - energia_one) > 0)
