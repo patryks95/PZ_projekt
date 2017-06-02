@@ -141,7 +141,7 @@ namespace PZ_projekt
                 if (Convert.ToInt32(one[i]) == Convert.ToInt32(comboBoxpodmacierz.SelectedItem.ToString()))
                 {
                     temp = new Expander();
-                    temp.Header = string.Format("{0,5}{1,25:N4}{2,35:N4}", one[i], one[i + 2], one[i + 3]);
+                    temp.Header = string.Format("{0,5}{1,30:N4}         {2,-20:N4}", one[i], one[i + 2], one[i + 3]);
                     StackPanel m_panel = new StackPanel();
                     temp.Content = m_panel;
                     temp.Tag = i.ToString();
@@ -163,7 +163,7 @@ namespace PZ_projekt
                             {
                                 Label etykieta = new Label();
                                 etykieta.Content = skladowe[a];
-                                etykieta.Margin = new Thickness((a*100)+15, 0, 0, 0);
+                                etykieta.Margin = new Thickness((a*80)+35, 0, 0, 0);
                                 grid.Children.Add(etykieta);
                             }
                             doczyszczenia.Children.Add(grid);
@@ -268,34 +268,33 @@ namespace PZ_projekt
                             Double Energia_two = Double.Parse(Two[i + 2].Replace(".", ","));
                             Double Liczba_falowa = Math.Abs(Energia_two - Energia_one);
                             Double dlugosc = 0;
-                            Double n = 0;
 
                             if (Liczba_falowa >= 50000)
                             {
-                                dlugosc = (100000000 / Liczba_falowa);
+                                dlugosc = Math.Round((100000000 / Liczba_falowa),5);
                             }
-                            if (Liczba_falowa < 50000)
+                        
+                        if (Liczba_falowa < 50000)
                             {
-                                 n= 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 10000), 2)))) * 0.00000001;
-                                dlugosc = (100000000 / (Liczba_falowa * n));
+
+                            
+                               Double n = 1 + (8060.51 + 2480990 / (132.2474 - Math.Pow((Liczba_falowa / 10000), 2)) + 17455.7 / (39.32957 - Math.Pow((Liczba_falowa / 10000), 2))) * 0.00000001;
+                                dlugosc = Math.Round((100000000 / (Liczba_falowa * n)),5);
 
 
                             }
-                            if(Energia_two > 59000 && Energia_two < 59080)
-                        {
-                            int a = 0;
-                        }
+                        Liczba_falowa = Math.Round(Liczba_falowa, 5);
                             if ((Energia_two - Energia_one) > 0)
                             {
-                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5} {6}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓", n));
+                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4:N4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↓"));
                             }
                             if ((Energia_two - Energia_one) == 0)
                             {
-                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5,} {6}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊", n));
+                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4:N4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "◊"));
                             }
                             if ((Energia_two - Energia_one) < 0)
                             {
-                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4}-{5} {6}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑", n));
+                                wynik.Add(String.Format("{0}-{1:N4}-{2:N4}-{3:N4}-{4:N4}-{5}", Two[i].ToString().Trim(), Two[i + 2].ToString().Trim(), Two[i + 3].ToString().Trim(), Liczba_falowa.ToString().Trim(), dlugosc.ToString().Trim(), "↑"));
                             }
 
 
