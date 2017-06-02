@@ -363,9 +363,14 @@ namespace PZ_projekt
                                 {
                                     
                                 }
-                                else
+                                else if(even.IsChecked == true)
                                 {
                                     Lista temp_lista = new Lista(one[j + 3].ToString(), Convert.ToDouble((one[j + 2]).Replace(".", ",")), Convert.ToDouble(one[j]), two[i + 3].ToString(), Convert.ToDouble((two[i + 2]).Replace(".", ",")), Convert.ToDouble(two[i]), "parzyste");
+                                    lista.Add(temp_lista);
+                                }
+                                else if(even.IsChecked == false)
+                                {
+                                    Lista temp_lista = new Lista(one[j + 3].ToString(), Convert.ToDouble((one[j + 2]).Replace(".", ",")), Convert.ToDouble(one[j]), two[i + 3].ToString(), Convert.ToDouble((two[i + 2]).Replace(".", ",")), Convert.ToDouble(two[i]), "nieparzyste");
                                     lista.Add(temp_lista);
                                 }
                                 //writer.WriteLine(String.Format("{0,15}{1,40:N4}{2,40:N4}{3,40:N4}{4,20}{5,40}{6,40}{7,40}", lista[0].Dlugosc.ToString(),lista[0].Liczba_falowa.ToString(),lista[0].Energia_one.ToString(), lista[0].J_one.ToString(), lista[0].Opis_one.ToString(), lista[0].Energia_two.ToString(), lista[0].J_two.ToString(), lista[0].Opis_two.ToString()));
