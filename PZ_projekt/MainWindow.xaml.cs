@@ -115,7 +115,7 @@ namespace PZ_projekt
             sr.Close();
 
             sr = new
-               System.IO.StreamReader(_File2Stream);
+            System.IO.StreamReader(_File2Stream);
             temp = new List<string>();
             while (!sr.EndOfStream)
             {
@@ -147,7 +147,7 @@ namespace PZ_projekt
                     temp.Tag = i.ToString();
                     temp.Expanded += (s, e) =>
                     {
-
+                        
                         Expander dzialania = (Expander)s;
                         StackPanel doczyszczenia = (StackPanel)dzialania.Content;
                         doczyszczenia.Children.Clear();
@@ -155,17 +155,29 @@ namespace PZ_projekt
                         List<string> obliczone = oblicz(one[Convert.ToInt32(dzialania.Tag)], one[Convert.ToInt32(dzialania.Tag)+2], two);
                         foreach (string obliczenia in obliczone)
                         {
-                            String[] skladowe = obliczenia.Split(new Char[] { '-' });
-                            
                             Grid grid = new Grid();
+                           // for (int j = 0; j < one.Count; j += 4)
+                           // {
+                                String[] skladowe = obliczenia.Split(new Char[] { '-' });
                             
-                            for (int a = 0; a<skladowe.Length;a++)
-                            {
-                                Label etykieta = new Label();
-                                etykieta.Content = skladowe[a];
-                                etykieta.Margin = new Thickness((a*80)+35, 0, 0, 0);
-                                grid.Children.Add(etykieta);
-                            }
+                                
+                            
+                                for (int a = 0; a<skladowe.Length;a++)
+                                {
+                                
+                                    if (one[Convert.ToInt32(dzialania.Tag)] == "1" && skladowe[0] == "1" && even.IsChecked == true)
+                                    {
+                                        var chuj = 0;
+                                    }
+                                    else
+                                    {
+                                        Label etykieta = new Label();
+                                        etykieta.Content = skladowe[a];
+                                        etykieta.Margin = new Thickness((a * 80) + 35, 0, 0, 0);
+                                        grid.Children.Add(etykieta);
+                                    }
+                                }
+                            //}
                             doczyszczenia.Children.Add(grid);
                         }
                     };
@@ -333,6 +345,9 @@ namespace PZ_projekt
                 List<String> wynik = new List<String>();
                 List<Lista> lista = new List<Lista>();
                 StreamWriter writer = File.CreateText(saveFileDialog1.FileName);
+                writer.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------");
+                writer.WriteLine(String.Format("{0,15}{1,15:N4}{2,20:N4}{3,8:N4}{4,20}{5,20}{6,8}{7,20}{8,10}", "Długość", "Liczba falowa", "E_u", "J_u", "Opis_u", "E_l", "J_l", "Opis_l", "Przejscie"));
+                writer.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------");
                 for (int j = 0; j < one.Count; j += 4)
                 {
                     //writer.WriteLine(String.Format("{0,5}{1,15}{2,15}", one[j] , one[j + 2] , one[j + 3])); 
@@ -344,32 +359,29 @@ namespace PZ_projekt
                             if (Int32.Parse(one[j]) - 1 == Int32.Parse(two[i]) || Int32.Parse(one[j]) == Int32.Parse(two[i]) || Int32.Parse(one[j]) + 1 == Int32.Parse(two[i]))
                             {
 
-                            
-                                
-                              
-                                Lista temp_lista = new Lista(one[j+3].ToString(), Convert.ToDouble((one[j + 2]).Replace(".",",")), Convert.ToDouble(one[j]), two[i + 3].ToString(), Convert.ToDouble((two[i + 2]).Replace(".",",")), Convert.ToDouble(two[i]),"parzyste");
-                                lista.Add(temp_lista);
-                                int a = 0;
+                                if (one[j] == "1" && two[i] == "1" && even.IsChecked == true)
+                                {
+                                    
+                                }
+                                else
+                                {
+                                    Lista temp_lista = new Lista(one[j + 3].ToString(), Convert.ToDouble((one[j + 2]).Replace(".", ",")), Convert.ToDouble(one[j]), two[i + 3].ToString(), Convert.ToDouble((two[i + 2]).Replace(".", ",")), Convert.ToDouble(two[i]), "parzyste");
+                                    lista.Add(temp_lista);
+                                }
                                 //writer.WriteLine(String.Format("{0,15}{1,40:N4}{2,40:N4}{3,40:N4}{4,20}{5,40}{6,40}{7,40}", lista[0].Dlugosc.ToString(),lista[0].Liczba_falowa.ToString(),lista[0].Energia_one.ToString(), lista[0].J_one.ToString(), lista[0].Opis_one.ToString(), lista[0].Energia_two.ToString(), lista[0].J_two.ToString(), lista[0].Opis_two.ToString()));
 
                             }
 
-                           
-                            
-
-
                         }
 
-                    }
-                 
-                    
+                    }                
 
                 }
                 IEnumerable<Lista> SortedList = lista.OrderBy(o => o.Dlugosc);
                 foreach (Lista listeczka in SortedList)
                 {
 
-                    writer.WriteLine(String.Format("{0,15}{1,40:N4}{2,40:N4}{3,40:N4}{4,20}{5,40}{6,40}{7,40}", listeczka.Dlugosc.ToString(), listeczka.Liczba_falowa.ToString(), listeczka.Energia_one.ToString(), listeczka.J_one.ToString(), listeczka.Opis_one.ToString(), listeczka.Energia_two.ToString(), listeczka.J_two.ToString(), listeczka.Opis_two.ToString()));
+                    writer.WriteLine(String.Format("{0,15}{1,15}{2,20}{3,8}{4,20}{5,20}{6,8}{7,20}{8,10}", listeczka.Dlugosc.ToString(), listeczka.Liczba_falowa.ToString(), listeczka.Energia_one.ToString(), listeczka.J_one.ToString(), listeczka.Opis_one.ToString(), listeczka.Energia_two.ToString(), listeczka.J_two.ToString(), listeczka.Opis_two.ToString(),listeczka.Przejscie.ToString()));
                 }
                 writer.Close();
             }
@@ -377,89 +389,6 @@ namespace PZ_projekt
             
         }
         
-        private void Parzysty_Click(object sender, RoutedEventArgs e)
-        {
-            if (Nieparzysty.IsChecked == true)
-            {
-                Nieparzysty.IsChecked = false;
-            }
-            if (Parzysty2.IsChecked == true || Nieparzysty2.IsChecked == false)
-            {
-                Parzysty2.IsChecked = false;
-                Nieparzysty2.IsChecked = true;
-            }
-            if (Parzysty.IsChecked == false)
-            {
-                Nieparzysty.IsChecked = false;
-                Nieparzysty2.IsChecked = false;
-                Parzysty.IsChecked = false;
-                Parzysty2.IsChecked = false;
-
-            }
-        }
-
-        private void Nieparzysty_Click(object sender, RoutedEventArgs e)
-        {
-            if (Parzysty.IsChecked == true)
-            {
-                Parzysty.IsChecked = false;
-            }
-            if (Parzysty2.IsChecked == false || Nieparzysty2.IsChecked == true)
-            {
-                Parzysty2.IsChecked = true;
-                Nieparzysty2.IsChecked = false;
-            }
-            if (Nieparzysty.IsChecked == false)
-            {
-                Nieparzysty.IsChecked = false;
-                Nieparzysty2.IsChecked = false;
-                Parzysty.IsChecked = false;
-                Parzysty2.IsChecked = false;
-
-            }
-        }
-
-        private void Parzysty2_Click(object sender, RoutedEventArgs e)
-        {
-            if (Nieparzysty2.IsChecked == true)
-            {
-                Nieparzysty2.IsChecked = false;
-            }
-            if (Parzysty.IsChecked == true || Nieparzysty.IsChecked == false)
-            {
-                Parzysty.IsChecked = false;
-                Nieparzysty.IsChecked = true;
-            }
-            if (Parzysty2.IsChecked == false)
-            {
-                Nieparzysty.IsChecked = false;
-                Nieparzysty2.IsChecked = false;
-                Parzysty.IsChecked = false;
-                Parzysty2.IsChecked = false;
-
-            }
-
-        }
-
-        private void Nieparzysty2_Click(object sender, RoutedEventArgs e)
-        {
-            if (Parzysty2.IsChecked == true)
-            {
-                Parzysty2.IsChecked = false;
-            }
-            if (Parzysty.IsChecked == false || Nieparzysty.IsChecked == true)
-            {
-                Parzysty.IsChecked = true;
-                Nieparzysty.IsChecked = false;
-            }
-            if (Nieparzysty2.IsChecked == false)
-            {
-                Nieparzysty.IsChecked = false;
-                Nieparzysty2.IsChecked = false;
-                Parzysty.IsChecked = false;
-                Parzysty2.IsChecked = false;
-
-            }
-        }
+       
     }
 }
