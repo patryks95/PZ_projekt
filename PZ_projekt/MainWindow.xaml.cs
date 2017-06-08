@@ -225,8 +225,13 @@ namespace PZ_projekt
 
             string[] dane = null;
             List<string> lista = new List<string>();
-            string pattern = @"^\s[1-9]\s+[1-9][0-9]*\s+[-]*[1-9]+[0-9]+.[0-9][0-9]*";
-            string pattern1 = @"^\s[1-9]\s+[1-9][0-9]*\s+[-]*[1-9]+[0-9]+.[0-9][0-9]*\s+[-]*[1-9][0-9]*.[0-9][0-9]*.{0,71}";
+            //string pattern = @"^\s[1-9]\s+[1-9][0-9]*\s+[-]*[1-9]+[0-9]+.[0-9][0-9]*";
+            //string pattern1 = @"^\s[1-9]\s+[1-9][0-9]*\s+[-]*[1-9]+[0-9]+.[0-9][0-9]*\s+[-]*[1-9][0-9]*.[0-9][0-9]*.{0,71}";
+
+            string pattern = @"^\s[1-9][0-9]*\s+[1-9][0-9]*\s+(([-]*[1-9]+[0-9]+.[0-9][0-9]*)|([0].[0]+))";
+            string pattern1 = @"^\s[1-9][0-9]*\s+[1-9][0-9]*\s+(([-]*[1-9]+[0-9]+.[0-9][0-9]*)|([0].[0]+))\s+[-]*[1-9][0-9]*.[0-9][0-9]*.{0,71}";
+
+
             Regex rgx = new Regex(pattern, RegexOptions.IgnoreCase);
             Regex rgx1 = new Regex(pattern1, RegexOptions.IgnoreCase);
             for (int i = 0; i < tab.Length; i++)
@@ -346,7 +351,7 @@ namespace PZ_projekt
                 List<Lista> lista = new List<Lista>();
                 StreamWriter writer = File.CreateText(saveFileDialog1.FileName);
                 writer.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------");
-                writer.WriteLine(String.Format("{0,15}{1,15:N4}{2,20:N4}{3,8:N4}{4,20}{5,20}{6,8}{7,20}{8,10}", "Długość", "Liczba falowa", "E_u", "J_u", "Opis_u", "E_l", "J_l", "Opis_l", "Przejscie"));
+                writer.WriteLine(String.Format("{0,15}{1,15:N4}{2,20:N4}{3,8:N4}{4,20}{5,20}{6,8}{7,20}{8,10}", "Długość(λ)", "Liczba falowa(σ)", "E_u", "J_u", "Opis_u", "E_l", "J_l", "Opis_l", "Przejscie"));
                 writer.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------");
                 for (int j = 0; j < one.Count; j += 4)
                 {

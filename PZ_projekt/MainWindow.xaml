@@ -87,6 +87,6 @@
                 <StackPanel   x:Name="panel"/>
             </ScrollViewer>
         </Grid>
-        <Label x:Name="etykiety" Content="Macierz                Energia               Opis               Liczba falowa     Długość     Przejście" HorizontalAlignment="Left" Margin="31,176,0,0" VerticalAlignment="Top" Height="27" Visibility="Hidden" Grid.RowSpan="2"/>
+        <Label x:Name="etykiety" Content="  Macierz                Energia              Opis            Liczba falowa(σ)     Długość(λ)     Przejście" HorizontalAlignment="Left" Margin="31,176,0,0" VerticalAlignment="Top" Height="27" Visibility="Hidden" Grid.RowSpan="2"/>
     </Grid>
 </Window>
