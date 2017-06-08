@@ -350,9 +350,9 @@ namespace PZ_projekt
                 List<String> wynik = new List<String>();
                 List<Lista> lista = new List<Lista>();
                 StreamWriter writer = File.CreateText(saveFileDialog1.FileName);
-                writer.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------");
-                writer.WriteLine(String.Format("{0,15}{1,15:N4}{2,20:N4}{3,8:N4}{4,20}{5,20}{6,8}{7,20}{8,10}", "Długość(λ)", "Liczba falowa(σ)", "E_u", "J_u", "Opis_u", "E_l", "J_l", "Opis_l", "Przejscie"));
-                writer.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------");
+                writer.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------------------");
+                writer.WriteLine(String.Format("{0,15}{1,20:N4}{2,20:N4}{3,8:N4}{4,20}{5,20}{6,8}{7,20}{8,15}", "Długość(λ)", "Liczba falowa(σ)", "E_u", "J_u", "Opis_u", "E_l", "J_l", "Opis_l", "Przejscie"));
+                writer.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int j = 0; j < one.Count; j += 4)
                 {
                     //writer.WriteLine(String.Format("{0,5}{1,15}{2,15}", one[j] , one[j + 2] , one[j + 3])); 
@@ -391,7 +391,7 @@ namespace PZ_projekt
                 foreach (Lista listeczka in SortedList)
                 {
 
-                    writer.WriteLine(String.Format("{0,15}{1,15}{2,20}{3,8}{4,20}{5,20}{6,8}{7,20}{8,10}", listeczka.Dlugosc.ToString(), listeczka.Liczba_falowa.ToString(), listeczka.Energia_one.ToString(), listeczka.J_one.ToString(), listeczka.Opis_one.ToString(), listeczka.Energia_two.ToString(), listeczka.J_two.ToString(), listeczka.Opis_two.ToString(),listeczka.Przejscie.ToString()));
+                    writer.WriteLine(String.Format("{0,15}{1,20}{2,20}{3,8}{4,20}{5,20}{6,8}{7,20}{8,15}", listeczka.Dlugosc.ToString(), listeczka.Liczba_falowa.ToString(), listeczka.Energia_one.ToString(), listeczka.J_one.ToString(), listeczka.Opis_one.ToString(), listeczka.Energia_two.ToString(), listeczka.J_two.ToString(), listeczka.Opis_two.ToString(),listeczka.Przejscie.ToString()));
                 }
                 writer.Close();
             }
